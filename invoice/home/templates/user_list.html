@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <title>Invoice list</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <style>
+      * {
+      box-sizing: border-box;
+      }
+      html, body {
+      min-height: 100vh;
+      padding: 0;
+      margin: 0;
+      font-family: Roboto, Arial, sans-serif;
+      font-size: 14px;
+      color: #666;
+      }
+      input, textarea {
+      outline: none;
+      }
+      body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: #5a7233;
+      }
+      h1 {
+      margin-top: 0;
+      font-weight: 500;
+      }
+      form {
+      position: relative;
+      width: 80%;
+      border-radius: 30px;
+      background: #fff;
+      }
+      .form-left-decoration,
+      .form-right-decoration {
+      content: "";
+      position: absolute;
+      width: 50px;
+      height: 20px;
+      border-radius: 20px;
+      background: #5a7233;
+      }
+      .form-left-decoration {
+      bottom: 60px;
+      left: -30px;
+      }
+      .form-right-decoration {
+      top: 60px;
+      right: -30px;
+      }
+      .form-left-decoration:before,
+      .form-left-decoration:after,
+      .form-right-decoration:before,
+      .form-right-decoration:after {
+      content: "";
+      position: absolute;
+      width: 50px;
+      height: 20px;
+      border-radius: 30px;
+      background: #fff;
+      }
+      .form-left-decoration:before {
+      top: -20px;
+      }
+      .form-left-decoration:after {
+      top: 20px;
+      left: 10px;
+      }
+      .form-right-decoration:before {
+      top: -20px;
+      right: 0;
+      }
+      .form-right-decoration:after {
+      top: 20px;
+      right: 10px;
+      }
+      .circle {
+      position: absolute;
+      bottom: 80px;
+      left: -55px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #fff;
+      }
+      .form-inner {
+      padding: 40px;
+      }
+      .form-inner input,
+      .form-inner textarea {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 20px;
+      background: #d0dfe8;
+      }
+      .form-inner textarea {
+      resize: none;
+      }
+      button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 20px;
+      border: none;
+      border-bottom: 4px solid #3e4f24;
+      background: #5a7233;
+      font-size: 16px;
+      font-weight: 400;
+      color: #fff;
+      }
+      button:hover {
+      background: #3e4f24;
+      }
+      .url{
+        text-align: center;
+        padding: 10px;
+        color:white;
+        background-color: red;
+        border-radius: 20px;
+      }
+      @media (min-width: 568px) {
+      form {
+      width: 60%;
+      }
+      }
+
+    .pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+    </style>
+</head>
+<body>
+<form method="POST" class="decor">
+    <div class="form-left-decoration"></div>
+    <div class="form-right-decoration"></div>
+    <div class="circle"></div>
+    <a class="url" href="{% url 'logout' %}">Logout</a>
+    <div class="form-inner">
+    
+<!--        <h1>create new form</h1>-->
+
+
+        <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+        <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+
+<!--        <ion-header-bar class="bar bar-subheader bar-balanced" style="padding:0px;">-->
+
+
+            <div class="tabs-striped tabs-top  tabs-color-light">
+
+                <div class="tabs-striped tabs-color-balanced">
+<!--                    <div class="tabs">-->
+                        <!--      <a class="tab-item active" href="#">-->
+                        <!--   <i class="ion-clipboard"> Invoice </i>-->
+                        <!--      </a>-->
+                        <!--      <a class="tab-item" href="#">-->
+                        <!--      <i class="ion-social-usd"> Payment</i>-->
+
+                        <!--      </a>-->
+                        <!--      <a class="tab-item" href="#">-->
+                        <!--<i class="ion-android-mail"> About Us</i>-->
+                        <!--      </a>-->
+
+<!--                    </div>-->
+                </div>
+            </div>
+
+
+        </ion-header-bar>
+
+
+        <ion-content>
+            <div class="row">
+                <div class="col col-25"><b>Invoice Number</b></div>
+                <div class="col col-25"><b>Candidate Name</b></div>
+                <div class="col col-25"><b>Total Amount</b></div>
+                <div class="col col-25" style="text-align:right"><b>Actions</b></div>
+                
+                
+
+            </div>
+            <ion-list>
+
+                <ion-item ng-repeat="item in invoices"
+                          item="item"
+                          href="#/item/{{item.id}}" class="item-remove-animate">
+                    
+                    {% for i in data %}
+                    <!-- {{i}} -->
+
+                    <div class="row">
+                        <div class="col col-25">{{i.invoice_num}}</div>
+                        <div class="col col-25">{{i.candidate_name}}</div>
+                        <div class="col col-25">{{i.candidate_name}}</div>
+                        <div class="col col-25" style="text-align:right"><a href="/invoice/{{i.invoice_num}}">view</a></div>
+                    </div>
+                    {% endfor %}
+
+                </ion-item>
+
+            </ion-list>
+
+        </ion-content>
+        <!-- <div class="pagination">
+          <a href="#">&laquo;</a>
+          <a href="#">1</a>
+          <a href="#">2</a>
+          <a href="#">3</a>
+          <a href="#">4</a>
+          <a href="#">5</a>
+          <a href="#">6</a>
+          <a href="#">&raquo;</a>
+        </div> -->
+        <!--      <div class="bar bar-footer bar-balanced">-->
+
+<!--        <div class="row">-->
+<!--            <div class="col"></div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</body>-->
+</html>
+
+
+</div>
+
+</form>
+</body>
+</html>
