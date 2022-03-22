@@ -57,7 +57,7 @@ def user_input(request):
         request.session['igst_percent'] = igst_percent
         sac_code = data.get("sac_code")
         request.session['sac_code'] = sac_code
-        check_user=UserInput.objects.all() 
+        check_user=UserInput.objects.all()
         invoice_number = 0
         if check_user is not None and len(check_user)>0:
             max_invoice = UserInput.objects.latest()
@@ -101,7 +101,7 @@ def user_input(request):
             )
         except ValueError:
             return HttpResponse("this is failed")
-        
+
 
         return redirect('pdf')
 
@@ -184,13 +184,16 @@ def get_invoice_detail(request,id):
 def loginuser(request):
     if request.method=="GET":
         return render(request,'login.html')
-    else:
+    if request.method=="POST":
         user=authenticate(request, username=request.POST['username'],password=request.POST['password'])
+        print(user)
         if user is None:
             return render(request,'login.html', {'error':'This Username or Password incorrect'})
         else:
             login(request,user)
             return redirect('index')
+    else:
+        return HttpResponse("method not allowed")
 
 def logout(request):
     auth.logout(request)

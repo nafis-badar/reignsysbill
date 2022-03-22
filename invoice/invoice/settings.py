@@ -86,7 +86,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'reignsys$db_bill',
-        'USER': 'db_bill',
+        'USER': 'reignsys',
         'PASSWORD': 'Welcome@2021',
         'HOST': 'reignsys.mysql.pythonanywhere-services.com',
     }
